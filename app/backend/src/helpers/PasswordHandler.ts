@@ -1,4 +1,5 @@
 import * as bcryptjs from 'bcryptjs';
+import { StatusCodes } from 'http-status-codes';
 import CustomError from './CustomError';
 
 export default class PasswordHandler {
@@ -13,7 +14,7 @@ export default class PasswordHandler {
       .compareSync(password, passwordDb) || password === passwordDb;
 
     if (!match) {
-      throw new CustomError(400, 'Invalid fields');
+      throw new CustomError(StatusCodes.UNAUTHORIZED, 'Incorrect email or password');
     }
   }
 }
