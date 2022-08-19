@@ -1,3 +1,6 @@
+import { StatusCodes } from 'http-status-codes';
+import CustomError from '../helpers/CustomError';
+import ICreateMatchDTO from '../interfaces/ICreateMatchDTO.interface';
 import Team from '../database/models/team';
 import Match from '../database/models/match';
 
@@ -35,5 +38,29 @@ export default class MatchesService {
     });
 
     return matches;
+  }
+
+  static async verifyIfTeamExists(teamId: string) {
+    const team = await Team.findByPk(teamId);
+
+    if (!team) throw new CustomError(StatusCodes.NOT_FOUND, 'There is no team with such id!');
+  }
+
+  static async create({ homeTeam, awayTeam, homeTeamGoals, awayTeamGoals }: ICreateMatchDTO) {
+    await Promise.all([this.verifyIfTeamExists(homeTeam), this.verifyIfTeamExists(awayTeam)]);
+
+    const match = await Match.create({
+      homeTeam, awayTeam, homeTeamGoals, awayTeamGoals, inProgress: true,
+    });
+
+    return match;
+  }
+
+  static async updateProgressToFalse(id: string) {
+    const match = await Match.findByPk(id);
+
+    if (!match) throw new CustomError(StatusCodes.NOT_FOUND, 'Match not found');
+
+    await Match.update({ inProgress: false }, { where: { id } });
   }
 }
