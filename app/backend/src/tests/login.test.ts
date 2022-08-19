@@ -5,9 +5,7 @@ import chaiHttp = require('chai-http');
 import User from '../database/models/user';
 
 import { app } from '../app';
-// import Example from '../database/models/ExampleModel';
 
-// import { Response } from 'superagent';
 import ILoginDTO from '../interfaces/ILoginDTO.interface';
 import JWT from '../helpers/jwt';
 

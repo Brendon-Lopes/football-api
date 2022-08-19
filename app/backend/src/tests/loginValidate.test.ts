@@ -6,7 +6,6 @@ import User from '../database/models/user';
 
 import { app } from '../app';
 
-import ILoginDTO from '../interfaces/ILoginDTO.interface';
 import JWT from '../helpers/jwt';
 
 chai.use(chaiHttp);
