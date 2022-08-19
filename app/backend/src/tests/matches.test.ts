@@ -21,6 +21,21 @@ const matchesMock = [{
     homeTeamGoals: 1,
     awayTeam: 8,
     awayTeamGoals: 1,
+    inProgress: true,
+    teamHome: {
+      teamName: "São Paulo"
+    },
+    teamAway: {
+      teamName: "Grêmio"
+    }
+}];
+
+const matchesMockNotInProgress = [{
+    id: 1,
+    homeTeam: 16,
+    homeTeamGoals: 1,
+    awayTeam: 8,
+    awayTeamGoals: 1,
     inProgress: false,
     teamHome: {
       teamName: "São Paulo"
@@ -28,7 +43,7 @@ const matchesMock = [{
     teamAway: {
       teamName: "Grêmio"
     }
-  }];
+}]
 
 describe('GET /matches endpoint', () => {
   describe('when it succeeds', () => {
@@ -54,6 +69,60 @@ describe('GET /matches endpoint', () => {
         .get('/matches');
 
       expect(response.body).to.deep.equal(matchesMock);
+    });
+  });
+});
+
+describe('GET /matches?inProgress=<boolean> endpoint', () => {
+  describe('when query parameter is true', () => {
+    beforeEach(() => {
+      sinon.stub(Match, 'findAll').resolves(matchesMock as IMatchesMock[]);
+    });
+
+    afterEach(() => {
+      sinon.restore();
+    });
+
+    it('should return status code 200', async () => {
+      const response = await chai
+        .request(app)
+        .get('/matches?inProgress=true');
+
+      expect(response.status).to.equal(200);
+    });
+
+    it('should return a list of matches', async () => {
+      const response = await chai
+        .request(app)
+        .get('/matches?inProgress=true');
+
+      expect(response.body).to.deep.equal(matchesMock);
+    });
+  });
+
+  describe('when query parameter is false', () => {
+    beforeEach(() => {
+      sinon.stub(Match, 'findAll').resolves(matchesMockNotInProgress as IMatchesMock[]);
+    });
+
+    afterEach(() => {
+      sinon.restore();
+    });
+
+    it('should return status code 200', async () => {
+      const response = await chai
+        .request(app)
+        .get('/matches?inProgress=false');
+
+      expect(response.status).to.equal(200);
+    });
+
+    it('should return a list of matches', async () => {
+      const response = await chai
+        .request(app)
+        .get('/matches?inProgress=false');
+
+      expect(response.body).to.deep.equal(matchesMockNotInProgress);
     });
   });
 });
