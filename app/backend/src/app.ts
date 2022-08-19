@@ -2,7 +2,8 @@ import 'express-async-errors';
 import * as express from 'express';
 import globalErrorHandler from './middlewares/GlobalErrorHandler';
 import userRouter from './routes/user.routes';
-import teamsRouter from './routes/teams.router';
+import teamsRouter from './routes/teams.routes';
+import matchesRouter from './routes/matches.routes';
 
 class App {
   public app: express.Express;
@@ -29,6 +30,7 @@ class App {
 
     this.app.use('/login', userRouter);
     this.app.use('/teams', teamsRouter);
+    this.app.use('/matches', matchesRouter);
 
     this.app.use(globalErrorHandler.handle);
   }

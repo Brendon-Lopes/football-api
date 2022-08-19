@@ -8,7 +8,7 @@ class Match extends Model {
   homeTeamGoals!: number;
   awayTeam!: number;
   awayTeamGoals!: number;
-  inProgress!: number;
+  inProgress!: boolean;
 }
 
 Match.init({
@@ -40,9 +40,10 @@ Match.init({
     field: 'away_team_goals',
   },
   inProgress: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.BOOLEAN,
     allowNull: false,
     field: 'in_progress',
+    defaultValue: false,
   },
 }, {
   underscored: true,
@@ -62,7 +63,7 @@ Match.init({
 // Example.hasMany(OtherModel, { foreignKey: 'campoC', as: 'campoEstrangeiroC' });
 // Example.hasMany(OtherModel, { foreignKey: 'campoD', as: 'campoEstrangeiroD' });
 
-Team.belongsTo(Match, { foreignKey: 'homeTeam', as: 'homeTeam' });
-Team.belongsTo(Match, { foreignKey: 'awayTeam', as: 'awayTeam' });
+Match.belongsTo(Team, { foreignKey: 'homeTeam', as: 'teamHome' });
+Match.belongsTo(Team, { foreignKey: 'awayTeam', as: 'teamAway' });
 
 export default Match;
