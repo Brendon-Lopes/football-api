@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import statusCodes from 'http-status-codes';
+import statusCodes, { StatusCodes } from 'http-status-codes';
 import MatchesService from '../services/match.service';
 
 export default class MatchesController {
@@ -18,5 +18,23 @@ export default class MatchesController {
 
     const matches = await MatchesService.getAll();
     return res.status(statusCodes.OK).json(matches);
+  }
+
+  static async create(req: Request, res: Response) {
+    const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals } = req.body;
+
+    const match = await MatchesService.create({
+      homeTeam, awayTeam, homeTeamGoals, awayTeamGoals,
+    });
+
+    return res.status(statusCodes.CREATED).json(match);
+  }
+
+  static async updateProgressToFalse(req: Request, res: Response) {
+    const { id } = req.params;
+
+    await MatchesService.updateProgressToFalse(id);
+
+    return res.status(StatusCodes.OK).json({ message: 'Finished' });
   }
 }
