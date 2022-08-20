@@ -37,4 +37,13 @@ export default class MatchesController {
 
     return res.status(StatusCodes.OK).json({ message: 'Finished' });
   }
+
+  static async update(req: Request, res: Response) {
+    const { id } = req.params;
+    const { homeTeamGoals, awayTeamGoals } = req.body;
+
+    await MatchesService.update(id, { homeTeamGoals, awayTeamGoals });
+
+    return res.status(StatusCodes.OK).json({ message: 'Successfully updated' });
+  }
 }
