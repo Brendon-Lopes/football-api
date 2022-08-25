@@ -5,7 +5,7 @@ interface ITeamData {
 
 export interface ILeaderboardData {
   teamName: string;
-  teamHome: ITeamData[]
+  teamHome: ITeamData[];
 }
 
 const sumTotalPoints = (acc: number, curr: ITeamData) => {
