@@ -13,31 +13,31 @@ const { expect } = chai;
 const sequelizeMockReturn = [
   {
     "teamName": "São Paulo",
-    "teamHome": [
-      {
-        "homeTeamGoals": 1,
-        "awayTeamGoals": 1
-      },
-      {
-        "homeTeamGoals": 3,
-        "awayTeamGoals": 0
-      }
-    ]
-  },
-  {
-    "teamName": "Internacional",
-    "teamHome": [
+    "teamAway": [
       {
         "homeTeamGoals": 1,
         "awayTeamGoals": 1
       },
       {
         "homeTeamGoals": 0,
-        "awayTeamGoals": 4
+        "awayTeamGoals": 3
+      }
+    ]
+  },
+  {
+    "teamName": "Internacional",
+    "teamAway": [
+      {
+        "homeTeamGoals": 1,
+        "awayTeamGoals": 1
       },
       {
-        "homeTeamGoals": 3,
-        "awayTeamGoals": 1
+        "homeTeamGoals": 4,
+        "awayTeamGoals": 0
+      },
+      {
+        "homeTeamGoals": 1,
+        "awayTeamGoals": 3
       }
     ]
   },
@@ -70,7 +70,7 @@ const formattedDataMock = [
   }
 ]
 
-describe('GET /leaderboard/home', () => {
+describe('GET /leaderboard/away', () => {
   describe('when it succeeds', () => {
     beforeEach(() => {
       sinon.stub(Team, 'findAll').resolves(sequelizeMockReturn as unknown as Team[]);
@@ -83,7 +83,7 @@ describe('GET /leaderboard/home', () => {
     it('should return status code 200', async () => {
       const response = await chai
         .request(app)
-        .get('/leaderboard/home');
+        .get('/leaderboard/away');
 
       expect(response.status).to.equal(200);
     });
@@ -91,7 +91,7 @@ describe('GET /leaderboard/home', () => {
     it('should return the correct data', async () => {
       const response = await chai
         .request(app)
-        .get('/leaderboard/home');
+        .get('/leaderboard/away');
 
       expect(response.body).to.deep.equal(formattedDataMock);
     });
