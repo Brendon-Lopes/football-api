@@ -1,7 +1,5 @@
 ### Select a language: English, [Português](./README-pt.md).
 
-<br/>
-
 # ⚽ Project Football API ⚽
 
 A football API where you can get info about matches, and teams leaderboards.
@@ -15,13 +13,9 @@ There's user validation using JWT (JSON Web Token). (A token is necessary to cre
 A Front-end is also available (made by Trybe).
 The Back-end was made by me.
 
-<br/>
-
 # Technologies used
 
 Docker, TypeScript, Express, Sequelize, MySQL, BCrypt, JWT, JOI, Mocha, Chai, Sinon...
-
-<br/>
 
 # Usage
 
@@ -60,8 +54,6 @@ Docker, TypeScript, Express, Sequelize, MySQL, BCrypt, JWT, JOI, Mocha, Chai, Si
   - to run the back-end's integration tests
 
 </details>
-
-<br/>
 
 # Final considerations
 

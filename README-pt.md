@@ -1,7 +1,5 @@
 ### Select a language: [English](https://github.com/Brendon-Lopes/football-api), Português.
 
-<br/>
-
 # ⚽ Projeto API de Futebol ⚽
 
 Uma API de Futebol, onde você pode buscar informações sobre partidas e tabelas do campeonato.
@@ -15,13 +13,9 @@ Existe validação de usuário usando JWT (JSON Web Token). (Um token é necess�
 Um Front-end também está disponível (feito pela Trybe).
 O Back-end foi feito por mim.
 
-<br/>
-
 # Tecnologias usadas
 
 Docker, TypeScript, Express, Sequelize, MySQL, BCrypt, JWT, JOI, Mocha, Chai, Sinon...
-
-<br/>
 
 # Como usar
 
@@ -60,8 +54,6 @@ Docker, TypeScript, Express, Sequelize, MySQL, BCrypt, JWT, JOI, Mocha, Chai, Si
   - para rodar os testes de integração do Back-end.
 
 </details>
-
-<br/>
 
 # Considerações finais
 
